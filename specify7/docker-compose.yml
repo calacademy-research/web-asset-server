@@ -1,0 +1,94 @@
+version: '3.7'
+services:
+
+
+  botany-specify-server:
+    restart: unless-stopped
+    build:
+#      dockerfile: Dockerfile-specify
+      dockerfile: Dockerfile
+      context: ./.
+    init: true
+    volumes:
+      - "specify6:/opt/Specify:ro"
+      - "static-files-botany:/volumes/static-files"
+    environment:
+      - DATABASE_HOST=host.docker.internal
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=casbotany
+      - MASTER_NAME=jfong
+      - MASTER_PASSWORD=J0nd@vid
+      - SECRET_KEY=STSUJNTVAGAX
+      - ASSET_SERVER_URL=http://192.168.1.92/web_asset_store.xml
+      - ASSET_SERVER_KEY=xXeLi2YsYgNwD2io
+      - WEB_ATTACHMENT_KEY=xXeLi2YsYgNwD2io
+      - REPORT_RUNNER_HOST=report-runner
+      - REPORT_RUNNER_PORT=8080
+      - CELERY_BROKER_URL=redis://redis/0
+      - CELERY_RESULT_BACKEND=redis://redis/1
+      - LOG_LEVEL=WARNING
+      - SP7_DEBUG=false
+
+  botany-specify-worker:
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile-specify
+      context: ./.
+    command: ve/bin/celery -A specifyweb worker -l INFO --concurrency=1
+    init: true
+    volumes:
+      - "specify6:/opt/Specify:ro"
+      - "static-files-botany:/volumes/static-files"
+    environment:
+      - DATABASE_HOST=host.docker.internal
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=casbotany
+      - MASTER_NAME=jfong
+      - MASTER_PASSWORD=J0nd@vid
+      - SECRET_KEY=STSUJNTVAGAX
+      - ASSET_SERVER_URL=http://192.168.1.92/web_asset_store.xml
+      - ASSET_SERVER_KEY=xXeLi2YsYgNwD2io
+      - WEB_ATTACHMENT_KEY=xXeLi2YsYgNwD2io
+      - REPORT_RUNNER_HOST=report-runner
+      - REPORT_RUNNER_PORT=8080
+      - CELERY_BROKER_URL=redis://redis/0
+      - CELERY_RESULT_BACKEND=redis://redis/1
+      - LOG_LEVEL=WARNING
+      - SP7_DEBUG=false
+
+
+  specify6:
+    image: specifyconsortium/specify6-service:6.8.01
+    volumes:
+      - "specify6:/volumes/Specify"
+
+  nginx:
+    restart: unless-stopped
+    image: nginx
+    ports:
+      - "9090:80"
+    volumes:
+      - "specify6:/volumes/specify6:ro" 
+      - "./nginx/specify.conf:/etc/nginx/conf.d/default.conf:ro"
+      - "static-files-botany:/volumes/static-files-botany:ro"
+      - "static-files-om:/volumes/static-files-om:ro"
+      - "static-files-iz:/volumes/static-files-iz:ro"
+      - "static-files-ich:/volumes/static-files-ich:ro"
+
+  
+  report-runner:
+    build:
+      dockerfile: Dockerfile-report-runner
+      context: ./.
+
+  redis:
+    restart: unless-stopped
+    image: redis:6.0
+
+volumes:
+  specify6: # provides Specify 6 files to Specify 7 and the web server'
+  static-files-botany:
+  static-files-om:
+  static-files-iz:
+  static-files-ich:
+
