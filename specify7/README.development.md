@@ -1,3 +1,6 @@
+associated repo: (not required - this direcotry should have what you need)
+https://github.com/calacademy-research/specify7-config
+
 Setting up for development:
 Set up image web-image-sever per readme.development.md in that repo.
 
