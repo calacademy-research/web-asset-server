@@ -1,0 +1,8 @@
+FROM specifyconsortium/report-runner
+USER root
+RUN microdnf install wget sudo xorg-x11-font-utils fontconfig yum
+RUN mkdir -p /etc/dnf/vars; echo "" > /etc/dnf/vars/ociregion
+RUN yum install --assumeyes  fontconfig libmspack
+RUN rpm -i https://rpmfind.net/linux/dag/redhat/el7/en/x86_64/dag/RPMS/cabextract-1.4-1.el7.rf.x86_64.rpm
+RUN rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+RUN microdnf install msttcorefonts
