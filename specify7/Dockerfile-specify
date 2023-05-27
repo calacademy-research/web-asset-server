@@ -1,0 +1,16 @@
+FROM specifyconsortium/specify7-service:v7
+USER root
+RUN apt-get update \
+ && apt-get -y install --no-install-recommends \
+	tzdata
+
+ENV TZ 'America/Los_Angeles'
+
+RUN echo $TZ > /etc/timezone && \
+	rm /etc/localtime && \
+	ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+	dpkg-reconfigure -f noninteractive tzdata && \
+	apt-get clean
+
+RUN sed -i "s/Chicago/Los_Angeles/g" /opt/specify7/settings/__init__.py
+RUN echo "WEB_ATTACHMENT_REQUIRES_KEY_FOR_GET = True" >> settings/local_specify_settings.py
