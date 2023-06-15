@@ -71,9 +71,6 @@ services:
       - "specify6:/volumes/specify6:ro" 
       - "./nginx/specify.conf:/etc/nginx/conf.d/default.conf:ro"
       - "static-files-botany:/volumes/static-files-botany:ro"
-      - "static-files-om:/volumes/static-files-om:ro"
-      - "static-files-iz:/volumes/static-files-iz:ro"
-      - "static-files-ich:/volumes/static-files-ich:ro"
 
   
   report-runner:
