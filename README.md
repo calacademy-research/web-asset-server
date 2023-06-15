@@ -12,3 +12,11 @@ and utilities in web-asset-server to overwrite its defaults.
 
 Finally, run docker-compose start in the specify7 directory after updating the
 ip address per the instructions.
+
+for specify7, pull: git@github.com:specify/specify7.git
+git clone git@github.com:specify/specify7.git in this directory and then copy
+the contents of specify-7-config over the files in this dir
+
+for web asset server, pull: https://github.com/calacademy-research/web-asset-server
+git clone https://github.com/calacademy-research/web-asset-server
+then copy the contents of web-asset-server-config over the files in this new dir
