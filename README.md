@@ -17,6 +17,7 @@ for specify7, pull: git@github.com:specify/specify7.git
 git clone git@github.com:specify/specify7.git in this directory and then copy
 the contents of specify-7-config over the files in this dir
 
-for web asset server, pull: https://github.com/calacademy-research/web-asset-server
+for web asset server:
 git clone https://github.com/calacademy-research/web-asset-server
-then copy the contents of web-asset-server-config over the files in this new dir
+then copy the contents of web-asset-server-config over the files in the new web-asset-server 
+directory.
