@@ -21,3 +21,5 @@ for web asset server:
 git clone https://github.com/calacademy-research/web-asset-server
 then copy the contents of web-asset-server-config over the files in the new web-asset-server 
 directory.
+Copy settings.template.py to settings.py and edit to reflect your environment.
+copy docker-compose.template.py to docker-compose.py and edit to reflect your environment
