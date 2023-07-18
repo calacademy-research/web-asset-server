@@ -1,2 +1,4 @@
 *.pyc
 /secret_key.py
+image_client/directory_tree.pickle
+image_client/iz_importer_config.py
