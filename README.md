@@ -1,3 +1,13 @@
+# Repository Archived
+
+# :warning: Repository Archived :warning:
+
+<font color="red">This repository is no longer in use. For updated versions or similar projects, please visit:</font>
+
+- [specify asset server](https://github.com/username/repo1)
+- [web asset importer](https://github.com/calacademy-research/web-asset-importer)
+
+
 Web Asset Server
 =========
 
